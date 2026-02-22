@@ -1,3 +1,3 @@
 [submodule "image-flow"]
 	path = image-flow
-	url = ../image-flow
+	url = https://github.com/bbondy/image-flow.git

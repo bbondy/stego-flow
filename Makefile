@@ -3,7 +3,7 @@ CXXFLAGS := -std=c++17 -Wall -Wextra -Wpedantic -O2
 
 TARGET := stego_demo
 TEST_TARGET := stego_tests
-OBJ_DIR := src/out/intermediate
+OBJ_DIR := build/intermediate
 
 IMAGE_FLOW_DIR := image-flow
 IMAGE_FLOW_SRC_DIR := $(IMAGE_FLOW_DIR)/src

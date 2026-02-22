@@ -1,5 +1,5 @@
 *.o
-src/out/
+build/
 stego_demo
 stego_tests
 *.png

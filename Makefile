@@ -3,6 +3,7 @@ CXXFLAGS := -std=c++17 -Wall -Wextra -Wpedantic -O2
 
 TARGET := stego_demo
 TEST_TARGET := stego_tests
+OBJ_DIR := src/out/intermediate
 
 IMAGE_FLOW_DIR := image-flow
 IMAGE_FLOW_SRC_DIR := $(IMAGE_FLOW_DIR)/src
@@ -20,8 +21,8 @@ IMAGE_FLOW_SRCS := \
 APP_SRCS := src/main.cpp src/steganography.cpp $(IMAGE_FLOW_SRCS)
 TEST_SRCS := src/tests.cpp src/steganography.cpp $(IMAGE_FLOW_SRCS)
 
-APP_OBJS := $(APP_SRCS:.cpp=.o)
-TEST_OBJS := $(TEST_SRCS:.cpp=.o)
+APP_OBJS := $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(APP_SRCS))
+TEST_OBJS := $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(TEST_SRCS))
 
 all: $(TARGET)
 
@@ -34,10 +35,11 @@ test: $(TEST_TARGET)
 $(TEST_TARGET): $(TEST_OBJS)
 	$(CXX) $(CXXFLAGS) -I$(IMAGE_FLOW_SRC_DIR) -Isrc -o $@ $(TEST_OBJS)
 
-%.o: %.cpp
+$(OBJ_DIR)/%.o: %.cpp
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -I$(IMAGE_FLOW_SRC_DIR) -Isrc -c $< -o $@
 
 clean:
-	rm -f $(APP_OBJS) $(TEST_OBJS) $(TARGET) $(TEST_TARGET) stego_message.png stego_test.png
+	rm -rf $(OBJ_DIR) $(TARGET) $(TEST_TARGET) stego_message.png stego_test.png
 
 .PHONY: all clean test

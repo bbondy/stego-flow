@@ -1,0 +1,10 @@
+*.o
+stego_demo
+stego_tests
+*.png
+*.bmp
+*.jpg
+*.gif
+*.swp
+*.swo
+.DS_Store

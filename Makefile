@@ -40,6 +40,6 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -I$(IMAGE_FLOW_SRC_DIR) -Isrc -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET) $(TEST_TARGET) stego_message.png stego_test.png
+	rm -rf build $(TARGET) $(TEST_TARGET)
 
 .PHONY: all clean test

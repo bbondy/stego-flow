@@ -6,6 +6,7 @@
 
 #include "steganography.h"
 
+#include <filesystem>
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -54,13 +55,15 @@ void testRoundtripPerFormatObject() {
 
 void testPersistedLosslessRoundtrip() {
     const std::string msg = "Hello world";
+    const std::string outDir = "build/output/test-images";
+    std::filesystem::create_directories(outDir);
 
     PNGImage img = api::createSmiley256PNG();
     stego::Steganography writer(img);
     require(writer.encodeMessage(msg), "Persisted PNG encode failed");
-    require(img.save("stego_test.png"), "Failed to save stego_test.png");
+    require(img.save(outDir + "/stego_test.png"), "Failed to save stego_test.png");
 
-    PNGImage loaded = PNGImage::load("stego_test.png");
+    PNGImage loaded = PNGImage::load(outDir + "/stego_test.png");
     stego::Steganography reader(loaded);
     require(reader.decodeMessage() == msg, "Persisted PNG decode failed");
 }

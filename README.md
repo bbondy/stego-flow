@@ -20,13 +20,13 @@ Commands:
 
 ```sh
 # Demo roundtrip with generated image
-./stego_demo demo [bitsPerChannel]
+./build/bin/stego_flow demo [bitsPerChannel]
 
 # Embed arbitrary binary payload file into an image from disk
-./stego_demo embed-file <input-image> <payload-file> <output-image> [bitsPerChannel]
+./build/bin/stego_flow embed-file <input-image> <payload-file> <output-image> [bitsPerChannel]
 
 # Extract payload bytes from an image to a file on disk
-./stego_demo extract-file <input-image> <output-file> [bitsPerChannel]
+./build/bin/stego_flow extract-file <input-image> <output-file> [bitsPerChannel]
 ```
 
 Supported image extensions are `.png`, `.bmp`, `.jpg`/`.jpeg`, and `.gif`.

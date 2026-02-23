@@ -1,4 +1,4 @@
-#include "api.h"
+#include "example_api.h"
 #include "bmp.h"
 #include "gif.h"
 #include "jpg.h"
@@ -119,7 +119,7 @@ int runDemo(std::uint8_t bitsPerChannel) {
     const std::string outDir = "build/output/images";
     std::filesystem::create_directories(outDir);
 
-    PNGImage image = api::createSmiley256PNG();
+    PNGImage image = example_api::createSmiley256PNG();
     stego::Steganography encoder(image, bitsPerChannel);
     if (!encoder.encodeMessage(hidden)) {
         std::cerr << "Failed to encode message\n";

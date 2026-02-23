@@ -1,4 +1,4 @@
-#include "api.h"
+#include "example_api.h"
 #include "bmp.h"
 #include "gif.h"
 #include "jpg.h"
@@ -30,10 +30,10 @@ void testCapacity() {
 void testRoundtripPerFormatObject(std::uint8_t bitsPerChannel) {
     const std::string msg = "Hello world";
 
-    BMPImage bmp = api::createSmiley256BMP();
-    PNGImage png = api::createSmiley256PNG();
-    JPGImage jpg = api::createSmiley256JPG();
-    GIFImage gif = api::createSmiley256GIF();
+    BMPImage bmp = example_api::createSmiley256BMP();
+    PNGImage png = example_api::createSmiley256PNG();
+    JPGImage jpg = example_api::createSmiley256JPG();
+    GIFImage gif = example_api::createSmiley256GIF();
 
     {
         stego::Steganography s(bmp, bitsPerChannel);
@@ -63,7 +63,7 @@ void testPersistedLosslessRoundtrip() {
     const std::string outDir = "build/output/test-images";
     std::filesystem::create_directories(outDir);
 
-    PNGImage img = api::createSmiley256PNG();
+    PNGImage img = example_api::createSmiley256PNG();
     stego::Steganography writer(img, bitsPerChannel);
     require(writer.encodeMessage(msg), "Persisted PNG encode failed");
     require(img.save(outDir + "/stego_test.png"), "Failed to save stego_test.png");
@@ -74,7 +74,7 @@ void testPersistedLosslessRoundtrip() {
 }
 
 void testInvalidBitDepth() {
-    PNGImage img = api::createSmiley256PNG();
+    PNGImage img = example_api::createSmiley256PNG();
 
     bool threwLow = false;
     try {
